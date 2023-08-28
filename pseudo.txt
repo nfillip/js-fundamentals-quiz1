@@ -1,0 +1,63 @@
+/*
+//create REPO
+    //clone down to pc
+
+//create file structure
+    assets ----style.css, logic.js
+    index.html
+    highscores.html
+    README.md
+    .gitignore
+        any file you list in here can get ignored by github
+        .DS_Store
+
+//Project Pieces
+    html structure
+      link js and css
+        test links
+      title
+      h1
+
+//HTML
+    link to highscores page--anchor tag
+    create 3 sections in your index.html file: 
+      1. start section
+            start button --> event listener
+              *timer starts
+              hide start section
+              show quiz section
+              display a question
+      2. quiz section
+            [
+              {
+                title: 'first question',
+                choices: [red,green, blue, yellow]
+                answer: [red] or index value
+              }
+            ]
+            atach click events to each option
+            when clicked check if asnwer is right or wrong
+              if right --> says you are correct and next questions
+              if wrong --> in correct and remove time and next questions
+                if score 0 --> game ends
+      3. submission-final grade section
+            form or input for user to put thier initials
+              store this into local storage
+                recommended data structure: 
+                  [
+                    {
+                      initials: 'jmm'
+                      score: 50
+                    },
+                    {
+                      initials2: 'nmf'
+                      score2: 99
+                    }
+                  ]
+
+    show start sections and hide other 2 sections
+
+highscores.html
+                  display all scores in desc order form local storage. 
+    
+*/
