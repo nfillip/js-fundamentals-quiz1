@@ -21,7 +21,7 @@ var tag = document.createElement("h2");
 document.body.appendChild(tag);
 var answerReassurance = document.querySelector("h2");
 var yourInitials = document.querySelector("#initials");
-
+var highScoreTable;
 //quiz answerKey array
 var finalScore;
 var i = 0;
@@ -164,7 +164,21 @@ function addToLocal() {
     // localStorage.setItem("initial", x)
 }
 
-function 
+function addToHighScorePage() {
+    highScoreTable = JSON.parse(localStorage.getItem("initial"));
+    // for (var k = 0; k<highScoreTable.length; k++){
+    //     if (highScoreTable[k+1].score<highScoreTable[k].score) {
+    //         highScoreTable.splice(k,0,highScoreTable[k+1]);
+    //     }
+    // }
+    for (var h = 0; h<highScoreTable.length; h++) {
+        var tag1 = document.createElement("li");
+        "#html2".appendChild(tag1);
+        var scoreindex = document.querySelector("#html2");
+        scoreindex.textContent = highScoreTable[h];
+        
+    }
+}
 
 //:::EVENT LISTENERS
 startButton.addEventListener("click", displayQuiz);
