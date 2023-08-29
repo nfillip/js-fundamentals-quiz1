@@ -2,10 +2,11 @@
 var score = 0;
 var secondsLeft = 60;
 //pulling from HTML ids
+var headerLink = document.querySelector("#topHead");
+var headerTimer = document.querySelector("#timer");
 var startButton = document.querySelector("#start-button");
 var startPage = document.querySelector("#start-page");
 var quizSection = document.querySelector("#quiz-section");
-var headerTimer = document.querySelector("#timer");
 var quizChoices = document.querySelector("#div-quiz");
 var resultsSection = document.querySelector("#results");
 var pointsFinal = document.querySelector("#points");
@@ -22,6 +23,7 @@ document.body.appendChild(tag);
 var answerReassurance = document.querySelector("h2");
 var yourInitials = document.querySelector("#initials");
 var highScoreTable;
+var finalSection = document.querySelector("#highscore");
 //quiz answerKey array
 var finalScore;
 var i = 0;
@@ -81,6 +83,8 @@ function displayResults() {
   pointsFinal.textContent = "Your Final Point Total: " + finalScore;
 }
 
+
+
 //testAnswer: compare answer choice with the correct answer in the answer object
 function testAnswer(answerChoice) {
   if (i === answerKey.length - 1) {
@@ -134,10 +138,12 @@ function testAnswer(answerChoice) {
 function setTime() {
   var timerInterval = setInterval(function () {
     secondsLeft--;
-    headerTimer.setAttribute("style", "text-align: center; font-size: 3rem;");
+    headerTimer.setAttribute("style", "font-size: 3rem;");
     headerTimer.textContent = secondsLeft;
     if (secondsLeft === 0 || j === 1) {
       clearInterval(timerInterval);
+      headerTimer.textContent = "Timer:"
+      headerTimer.setAttribute("style", "font-size: 1.5rem;");
     }
   }, 1000);
 }
@@ -165,17 +171,26 @@ function addToLocal() {
 }
 
 function addToHighScorePage() {
+    finalSection.setAttribute("style", "display: grid; grid-template-columns: 1fr 1fr");
+    resultsSection.setAttribute("style", "display: none");
+    quizSection.setAttribute("style", "display: none");
+    startPage.setAttribute("style", "display: none");
+    headerLink.textContent = "retake the quiz"
     highScoreTable = JSON.parse(localStorage.getItem("initial"));
+    console.log(highScoreTable);
     // for (var k = 0; k<highScoreTable.length; k++){
     //     if (highScoreTable[k+1].score<highScoreTable[k].score) {
     //         highScoreTable.splice(k,0,highScoreTable[k+1]);
     //     }
     // }
     for (var h = 0; h<highScoreTable.length; h++) {
+        
         var tag1 = document.createElement("li");
-        "#html2".appendChild(tag1);
-        var scoreindex = document.querySelector("#html2");
-        scoreindex.textContent = highScoreTable[h];
+        var tag2 = document.createElement("li");
+        finalSection.appendChild(tag1);
+        finalSection.appendChild(tag2);
+        tag1.textContent = highScoreTable[h].initials;
+        tag2.textContent = highScoreTable[h].score;
         
     }
 }
@@ -216,6 +231,30 @@ submitButton.addEventListener("click", function (event){
     if (element.matches("button")){
         addToLocal();
     }
+    
     addToHighScorePage();
+ 
 }
 )
+
+headerLink.addEventListener("click", function(event) {
+    console.log(headerLink.textContent);
+    event.stopPropagation();
+    event.preventDefault();
+    var element = event.target;
+    if (element.matches("div")){
+       if (headerLink.textContent === "Go To HighScores"){
+            j = 1 ;
+            addToHighScorePage();
+            headerTimer.textContent = "Timer:"
+            headerTimer.setAttribute("style", "font-size: 1.5rem")
+       } else {
+            location.reload();
+       }
+    }
+})
+
+if (secondsLeft <=0) {
+    finalScore = 0;
+    displayResults();
+}
