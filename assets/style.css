@@ -1,10 +1,13 @@
 body {
   font-size: 62.5%;
-  background-color: aquamarine;
+  background-color: #86BBBD;
+   
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
+  
 }
 
 #start-page {
