@@ -83,7 +83,7 @@ h1{
 
 #topHead:hover {
     text-decoration: underline;
-    color: blue;
+    color: rgb(221, 109, 193);
     font-weight: bold;
     cursor: pointer;
 }
