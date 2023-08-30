@@ -151,7 +151,7 @@ function setTime() {
 
 //function: addtoLocal - takes the input value from the input element and stores locally
 function addToLocal() {
-    console.log(yourInitials.value);
+    
     var mostRecent = {
         initials: yourInitials.value,
         score: finalScore 
@@ -162,7 +162,7 @@ function addToLocal() {
     } else {
         var temp = JSON.parse(localStorage.getItem("initial"));
         temp.push(mostRecent);
-        console.log(temp);
+        
         localStorage.setItem("initial" , JSON.stringify(temp));
         
     }
@@ -177,12 +177,68 @@ function addToHighScorePage() {
     startPage.setAttribute("style", "display: none");
     headerLink.textContent = "retake the quiz"
     highScoreTable = JSON.parse(localStorage.getItem("initial"));
-    console.log(highScoreTable);
-    // for (var k = 0; k<highScoreTable.length; k++){
-    //     if (highScoreTable[k+1].score<highScoreTable[k].score) {
-    //         highScoreTable.splice(k,0,highScoreTable[k+1]);
-    //     }
-    // }
+    // console.log(highScoreTable);
+    
+    //sort the array
+    var array2 = [1,5,7,3,6,4];
+    var temp2;
+    var largest;
+    var indexLargestInitial = -1;
+   
+    for(var j = 0; j<array2.length-1; j++) {
+        largest = array2[j];
+            // console.log("largest: " + largest);
+        indexLargestInitial = -1;
+        for (var h = j+1; h<array2.length; h++) {
+            if (array2[h] > largest) {
+            largest = array2[h];
+            // console.log("largest: " + largest);
+            indexLargestInitial = h;
+            // console.log("largestInitiral: " + h);
+            } 
+        }
+        if (indexLargestInitial !== -1){
+        temp2 = array2[j];
+        // console.log("temp: " + temp2)
+        array2[j] = largest;
+        // console.log("array2[j]: " + array2[j]);
+        array2[indexLargestInitial] = temp2;
+        // console.log("array2[h]: " + array2[indexLargestInitial]);
+         
+        console.log(array2);
+        }
+        
+    }
+    console.log(array2);
+
+    for(var j = 0; j<highScoreTable.length-1; j++) {
+        largest = highScoreTable[j].score;
+        largestObject = highScoreTable[j];
+            // console.log("largest: " + largest);
+        indexLargestInitial = -1;
+        for (var h = j+1; h<highScoreTable.length; h++) {
+            if (highScoreTable[h].score > largest) {
+            largest = highScoreTable[h].score;
+            largestObject = highScoreTable[h];
+            // console.log("largest: " + largest);
+            indexLargestInitial = h;
+            // console.log("largestInitiral: " + h);
+            } 
+        }
+        if (indexLargestInitial !== -1){
+        temp2 = highScoreTable[j];
+        // console.log("temp: " + temp2)
+        highScoreTable[j] = largestObject;
+        // console.log("array2[j]: " + array2[j]);
+        highScoreTable[indexLargestInitial] = temp2;
+        // console.log("array2[h]: " + array2[indexLargestInitial]);
+         
+        console.log(highScoreTable);
+        }
+        
+    }
+    console.log(array2);
+
     for (var h = 0; h<highScoreTable.length; h++) {
         
         var tag1 = document.createElement("li");
@@ -238,7 +294,7 @@ submitButton.addEventListener("click", function (event){
 )
 
 headerLink.addEventListener("click", function(event) {
-    console.log(headerLink.textContent);
+    
     event.stopPropagation();
     event.preventDefault();
     var element = event.target;
