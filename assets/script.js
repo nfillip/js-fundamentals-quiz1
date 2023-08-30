@@ -1,4 +1,6 @@
 //:::GLOBAL VERIABLES
+////styling
+var bodyBackground = document.querySelector("#body-background");
 ////start page
 var headerLink = document.querySelector("#topHead");
 var headerTimer = document.querySelector("#timer");
@@ -29,8 +31,8 @@ var finalSection = document.querySelector("#highscore");
 var finalDiv = document.querySelector("#finalDiv");
 var resetButton = document.querySelector("#reset-button");
 ////timer Variables
-var secondsLeft = prompt("How many seconds do you want on the quiz?");
-var answerReassuranceTimer = 3; 
+var secondsLeft; 
+var answerReassuranceTimer = 2; 
 ////quiz answerKey array
 var finalScore;
 var i = 0;
@@ -128,7 +130,8 @@ function testAnswer(answerChoice) {
     } else {
       //correct final answerchoice
       answerReassurance.setAttribute("style", "color: green; font-size: 2em");
-      answerReassuranceTimer = 3;
+
+      answerReassuranceTimer = 2;
       var h2Timer = setInterval(function () {
         answerReassurance.textContent = "That was correct.";
         if (answerReassuranceTimer <= 0) {
@@ -142,37 +145,34 @@ function testAnswer(answerChoice) {
     
   } else if (answerChoice === answerKey[i].answer) {
     //correct answer but not last question
-    i++;
-    questionTitle.textContent = answerKey[i].title;
-    choiceA.textContent = answerKey[i].choice[0];
-    choiceB.textContent = answerKey[i].choice[1];
-    choiceC.textContent = answerKey[i].choice[2];
+  
     answerReassurance.setAttribute("style", "color: green; font-size: 2em");
-    answerReassuranceTimer = 3;
+    answerReassurance.textContent ="That was correct! Here's the next question...";
+    answerReassuranceTimer = 2;
     var h2Timer = setInterval(function () {
-        answerReassurance.textContent ="That was correct! Here's the next question...";
+        
         if (answerReassuranceTimer <=0) {
             clearInterval(h2Timer);
             answerReassurance.textContent = "";
         }
         answerReassuranceTimer--;
         }, 1000);
-
-    
-    
-  } else {
-    //incorrect answer but not last question
-    i++;
-    secondsLeft -= 10;
+  i++;
     questionTitle.textContent = answerKey[i].title;
     choiceA.textContent = answerKey[i].choice[0];
     choiceB.textContent = answerKey[i].choice[1];
     choiceC.textContent = answerKey[i].choice[2];
+    
+    
+  } else {
+    //incorrect answer but not last question
+    secondsLeft -= 10;
     if (secondsLeft > 0) {
       answerReassurance.setAttribute("style", "color: red; font-size: 2em");
-      answerReassuranceTimer = 3;
+      answerReassurance.textContent = "That was incorrect. Here's the next question...";
+      answerReassuranceTimer = 2;
       var h2Timer = setInterval(function () {
-        answerReassurance.textContent = "That was incorrect. Here's the next question...";
+        
         if (answerReassuranceTimer <=0) {
             clearInterval(h2Timer);
             answerReassurance.textContent = "";
@@ -182,9 +182,10 @@ function testAnswer(answerChoice) {
       
     } else {
       answerReassurance.setAttribute("style", "color: red; font-size: 2em");
-      answerReassuranceTimer = 3;
+      answerReassurance.textContent = "That was incorrect. GAMEOVER.";
+      answerReassuranceTimer = 2;
       var h2Timer = setInterval(function () {
-        answerReassurance.textContent = "That was incorrect. GAMEOVER.";
+        
         if (answerReassuranceTimer <=0) {
             clearInterval(h2Timer);
             answerReassurance.textContent = "";
@@ -193,7 +194,11 @@ function testAnswer(answerChoice) {
         }, 1000);
       
     }
-    
+    i++;
+    questionTitle.textContent = answerKey[i].title;
+    choiceA.textContent = answerKey[i].choice[0];
+    choiceB.textContent = answerKey[i].choice[1];
+    choiceC.textContent = answerKey[i].choice[2];
   }
 }
 
@@ -293,12 +298,19 @@ function sortArrayofObjects() {
 
 //:::EVENT LISTENERS
 ////start button
-startButton.addEventListener("click", displayQuiz);
+startButton.addEventListener("click", function(){
+    secondsLeft = prompt("How many seconds do you want on the quiz?");
+    bodyBackground.setAttribute("style", "background-size: cover; background-position: center center");bodyBackground.style.backgroundImage = "url(https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2564&q=80)";
+     
+    displayQuiz();
+    } );
 
 ////buttonA
 buttonA.addEventListener("click", function (event) {
   event.stopPropagation();
   var element = event.target;
+  answerReassurance.textContent = ""
+  answerReassuranceTimer = 0;
   if (element.matches("button")) {
     testAnswer(choiceA.textContent);
   }
@@ -307,6 +319,8 @@ buttonA.addEventListener("click", function (event) {
 buttonB.addEventListener("click", function (event) {
   event.stopPropagation();
   var element = event.target;
+  answerReassurance.textContent = ""
+  answerReassuranceTimer = 0;
   if (element.matches("button")) {
     testAnswer(choiceB.textContent);
   }
@@ -315,6 +329,8 @@ buttonB.addEventListener("click", function (event) {
 buttonC.addEventListener("click", function (event) {
   event.stopPropagation();
   var element = event.target;
+  answerReassurance.textContent = ""
+  answerReassuranceTimer = 0;
   if (element.matches("button")) {
     testAnswer(choiceC.textContent);
   }
@@ -326,6 +342,10 @@ submitButton.addEventListener("click", function (event) {
   event.preventDefault();
   var element = event.target;
   if (element.matches("button")) {
+    bodyBackground.setAttribute("style", "background-size: cover; background-position: center center; color: rgb(221, 109, 193)");
+    bodyBackground.style.backgroundImage = "url(https://images.unsplash.com/photo-1617396900799-f4ec2b43c7ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80)";
+    
+    
     addToLocal();
   }
   //   addToHighScorePage();
@@ -339,6 +359,9 @@ headerLink.addEventListener("click", function (event) {
   if (element.matches("div")) {
     if (headerLink.textContent === "Go To HighScores") {
       j = 1;
+      bodyBackground.setAttribute("style", "background-size: cover; background-position: center center; color: rgb(221, 109, 193)");
+        bodyBackground.style.backgroundImage = "url(https://images.unsplash.com/photo-1617396900799-f4ec2b43c7ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80)";
+        
       addToHighScorePage();
       headerTimer.textContent = "Timer:";
       headerTimer.setAttribute("style", "font-size: 1.5rem");

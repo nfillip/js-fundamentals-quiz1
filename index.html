@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css">
-    <title>JS Fundamenetals Quiz</title>
-</head>
-<body>
-    <header  >
-        <div id ="topHead">Go To HighScores</div>
-        <div id = "timer">Timer:</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>JS Fundamentals Quiz</title>
+  </head>
+  <body id = "body-background">
+    <header>
+      <div id="topHead">Go To HighScores</div>
+      <div id="timer">Timer:</div>
     </header>
-    <section id = "start-page">
-        <h1>Welcome to the quiz</h1>
-        <button id = "start-button">Start The Quiz</button>
+    <section id="start-page">
+      <h1>Welcome to the quiz</h1>
+      <button id="start-button">Start The Quiz</button>
     </section>
-    <section id = "quiz-section">
-        
-        <h1 id = "question-title">QUESTION GOES HERE</h1>
-        <div id = "div-quiz">
-            <button id = "buttonA">A</button>
-            <p id = "choiceA">Choice A</p>
-            <button id = "buttonB">B</button>
-            <p id = "choiceB">Choice B</p>
-            <button id = "buttonC">C</button>
-            <p id = "choiceC">Choice C</p>
-        </div>
+    <section id="quiz-section">
+      <h1 id="question-title">QUESTION GOES HERE</h1>
+      <div id="div-quiz">
+        <button id="buttonA">A</button>
+        <p id="choiceA">Choice A</p>
+        <button id="buttonB">B</button>
+        <p id="choiceB">Choice B</p>
+        <button id="buttonC">C</button>
+        <p id="choiceC">Choice C</p>
+      </div>
     </section>
-    <section id = "results">
-        <h1 id = "points">Here are your results</h1>
-        <p id = "your-results"></p>
-        <form >
-            <input placeholder = "put your initials here" id = "initials">
-            <button id = "submit-score">Submit Score</button>
-        </form>
-        <a href="./highscores.html" target = "_blank"></a>
+    <section id="results">
+      <h1 id="points">Here are your results</h1>
+      <p id="your-results"></p>
+      <form>
+        <input placeholder="put your initials here" id="initials" />
+        <button id="submit-score">Submit Score</button>
+      </form>
+      <a href="./highscores.html" target="_blank"></a>
     </section>
     <section id="highscore">
-        <div>
-            <button id = "reset-button">RESET SCORES</button>
-        </div>
-        <div id = "finalDiv">
-            <li id = "bolder">INITIALS:</li>
-            <li id = "bolder">SCORE:</li>
-        </div>
-        
+      <div>
+        <button id="reset-button">RESET SCORES & RETURN HOME</button>
+      </div>
+      <div id="finalDiv">
+        <li id="bolder">INITIALS:</li>
+        <li id="bolder">SCORE:</li>
+      </div>
     </section>
     <script src="./assets/script.js"></script>
-</body>
+  </body>
 </html>
