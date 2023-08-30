@@ -30,6 +30,7 @@ var finalDiv = document.querySelector("#finalDiv");
 var resetButton = document.querySelector("#reset-button");
 ////timer Variables
 var secondsLeft = prompt("How many seconds do you want on the quiz?");
+var answerReassuranceTimer = 3; 
 ////quiz answerKey array
 var finalScore;
 var i = 0;
@@ -51,7 +52,7 @@ var answerKey = [
     answer: ".pop()",
   },
   {
-    title: "what does i++ do the variable i?",
+    title: "what does i++ do to the variable i?",
     choice: ["adds 2", "adds 1", "undefined"],
     answer: "adds 1",
   },
@@ -109,19 +110,36 @@ function testAnswer(answerChoice) {
         finalScore = 0;
       }
       answerReassurance.setAttribute("style", "color: red; font-size: 2em");
-      answerReassurance.textContent = "That was incorrect.";
+      answerReassuranceTimer = 3;
       var h2Timer = setInterval(function () {
-        answerReassurance.textContent = "";
-      }, 3000);
+        answerReassurance.textContent = "That was incorrect.";
+        if (answerReassuranceTimer <= 0 ){
+            clearInterval(h2Timer);
+            answerReassurance.textContent = "";
+            displayResults();
+        }
+        answerReassuranceTimer--;
+        }, 1000);
+      
+      
+    //   var h2Timer = setInterval(function () {
+    //     answerReassurance.textContent = "";
+    //   }, 3000);
     } else {
       //correct final answerchoice
       answerReassurance.setAttribute("style", "color: green; font-size: 2em");
-      answerReassurance.textContent = "That was correct.";
+      answerReassuranceTimer = 3;
       var h2Timer = setInterval(function () {
-        answerReassurance.textContent = "";
-      }, 3000);
+        answerReassurance.textContent = "That was correct.";
+        if (answerReassuranceTimer <= 0) {
+           clearInterval(h2Timer)
+           answerReassurance.textContent = ""; 
+           displayResults();
+        }
+        answerReassuranceTimer--;
+      }, 1000);
     }
-    displayResults(); //go to the results page
+    
   } else if (answerChoice === answerKey[i].answer) {
     //correct answer but not last question
     i++;
@@ -130,11 +148,18 @@ function testAnswer(answerChoice) {
     choiceB.textContent = answerKey[i].choice[1];
     choiceC.textContent = answerKey[i].choice[2];
     answerReassurance.setAttribute("style", "color: green; font-size: 2em");
-    answerReassurance.textContent =
-      "That was correct! Here's the next question...";
+    answerReassuranceTimer = 3;
     var h2Timer = setInterval(function () {
-      answerReassurance.textContent = "";
-    }, 3000);
+        answerReassurance.textContent ="That was correct! Here's the next question...";
+        if (answerReassuranceTimer <=0) {
+            clearInterval(h2Timer);
+            answerReassurance.textContent = "";
+        }
+        answerReassuranceTimer--;
+        }, 1000);
+
+    
+    
   } else {
     //incorrect answer but not last question
     i++;
@@ -145,15 +170,30 @@ function testAnswer(answerChoice) {
     choiceC.textContent = answerKey[i].choice[2];
     if (secondsLeft > 0) {
       answerReassurance.setAttribute("style", "color: red; font-size: 2em");
-      answerReassurance.textContent =
-        "That was incorrect. Here's the next question...";
+      answerReassuranceTimer = 3;
+      var h2Timer = setInterval(function () {
+        answerReassurance.textContent = "That was incorrect. Here's the next question...";
+        if (answerReassuranceTimer <=0) {
+            clearInterval(h2Timer);
+            answerReassurance.textContent = "";
+        }
+        answerReassuranceTimer--;
+        }, 1000);
+      
     } else {
       answerReassurance.setAttribute("style", "color: red; font-size: 2em");
-      answerReassurance.textContent = "That was incorrect. GAMEOVER.";
+      answerReassuranceTimer = 3;
+      var h2Timer = setInterval(function () {
+        answerReassurance.textContent = "That was incorrect. GAMEOVER.";
+        if (answerReassuranceTimer <=0) {
+            clearInterval(h2Timer);
+            answerReassurance.textContent = "";
+        }
+        answerReassuranceTimer--;
+        }, 1000);
+      
     }
-    var h2Timer = setInterval(function () {
-      answerReassurance.textContent = "";
-    }, 3000);
+    
   }
 }
 
