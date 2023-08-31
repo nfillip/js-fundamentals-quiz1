@@ -244,7 +244,7 @@ function addToLocal() {
 function addToHighScorePage() {
   finalSection.setAttribute(
     "style",
-    "display: flex; flex-direction: column; align-items: center; jusify-content: space-around"
+    "display: flex; flex-direction: column; align-items: center; justify-content: space-around"
   );
   finalDiv.setAttribute(
     "style",
